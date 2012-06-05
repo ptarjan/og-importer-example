@@ -14,7 +14,7 @@ if (!$_SERVER['HTTPS'] && $_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
   );
 }
 
-$key = 'oauth:access_token:'.$_GET['access_token'];
+$key = 'oauth:access_token:'.$_POST['access_token'];
 $m = get_memcache();
 $data = $m->get($key);
 
