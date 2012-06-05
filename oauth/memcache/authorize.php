@@ -18,6 +18,13 @@ $cancel_uri = addParamsToURL(
   )
 );
 
+if ($_GET['display'] == 'none') {
+  // This would normally issue a very limited access token that can 
+  // only call "import" and nothing else
+  $_POST = $_GET;
+  include_once('authorize_success.php');
+}
+
 ?>
 Send all your data to <?php print $app_name ?>?
 
