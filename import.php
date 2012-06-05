@@ -41,7 +41,7 @@ for ($i = 0; $i < 10; $i++) {
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
   $response = curl_exec($ch);
-  $data = json_decode($data, true);
+  $data = json_decode($response, true);
   
   if (isset($data['id'])) {
     // Log something good
