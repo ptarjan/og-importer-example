@@ -4,7 +4,7 @@ This is a simple OAuth example provider and importer endpoint. The user first hi
 
 # Heroku
 
-This is running live on [http://og-importer-example.herokuapp.com/](http://og-importer-example.herokuapp.com/).
+This is running live on [http://og-importer-example.herokuapp.com/](http://og-importer-example.herokuapp.com/)
 
 If you run it on heroku, it needs the free memcache addon.  You can get it with:
 
