@@ -23,6 +23,7 @@ if ($_GET['display'] == 'none') {
   // only call "import" and nothing else
   $_POST = $_GET;
   include_once('authorize_success.php');
+  die();
 }
 
 ?>
