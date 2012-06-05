@@ -38,7 +38,7 @@ if ($params['redirect_uri'] !== $_POST['redirect_uri']) {
 // So it can't be re-used
 $m->delete($code_key);
 
-$token = mt_rand();
+$token = (string) mt_rand();
 $key = 'oauth:access_token:'.$token;
 $m->set(
   $key, 
