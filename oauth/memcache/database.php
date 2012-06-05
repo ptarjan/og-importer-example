@@ -14,7 +14,10 @@ function get_app_name($id) {
 }
 
 function assert_redirect_allowed($id, $redirect_uri) {
-  if ($redirect_uri == 'https://www.facebook.com/open_graph/oauth/callback?service=1000') {
+  if ($redirect_uri == 'https://www.facebook.com/open_graph/oauth/callback?service=1001') {
+    return;
+  }
+  if ($redirect_uri == 'https://www.ptarjan.dev4432.facebook.com/open_graph/oauth/callback?service=1001') {
     return;
   }
   throw new Exception('Invalid Redirect URI: '.$redirect_uri);

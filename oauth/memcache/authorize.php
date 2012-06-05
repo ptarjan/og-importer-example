@@ -3,6 +3,10 @@
 require_once('database.php');
 require_once('url_utils.php');
 
+if ($_GET['response_type'] !== 'code') {
+  throw new Exception('Only code response type supported');
+}
+
 assert_redirect_allowed($_GET['client_id'], $_GET['redirect_uri']);
 $app_name = get_app_name($_GET['client_id']);
 
