@@ -2,7 +2,7 @@
 
 require_once('lib/memcache.php');
 
-if (!$_SERVER['HTTPS']) {
+if (!$_SERVER['HTTPS'] && $_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
   header('WWW-Authenticate: Bearer, error=invalid_request');
   die(
     json_encode(
