@@ -8,7 +8,7 @@ $m = get_memcache();
 
 assert_correct_secret($_POST['client_id'], $_POST['client_secret']);
 
-$key = 'oauth:code:'.$user_id.':'.$_POST['client_id'].':'.$_POST['redirect_uri'];
+$code_key = 'oauth:code:'.$user_id.':'.$_POST['client_id'].':'.$_POST['redirect_uri'];
 $code = $m->get($code_key);
 
 if ($code != $_POST['code']) {
