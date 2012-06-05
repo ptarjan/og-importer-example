@@ -47,7 +47,7 @@ for ($i = 0; $i < 10; $i++) {
     // Log something good
   } else {
     // Log some error
-    error_log($data['error']);
+    error_log($response);
   }
 }
 
