@@ -1,7 +1,8 @@
 <?php
 
-require_once('database.php');
-require_once('url_utils.php');
+require_once('../lib/database.php');
+require_once('../lib/memcache.php');
+require_once('../lib/url_utils.php');
 
 if ($_GET['response_type'] !== 'code') {
   throw new Exception('Only code response type supported');

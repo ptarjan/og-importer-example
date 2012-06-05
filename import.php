@@ -1,6 +1,6 @@
 <?php
 
-require_once('memcache.php');
+require_once('lib/memcache.php');
 
 if (!$_SERVER['HTTPS']) {
   header('WWW-Authenticate: Bearer, error=invalid_request');

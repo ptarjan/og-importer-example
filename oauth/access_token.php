@@ -1,7 +1,7 @@
 <?php
 
-require_once('database.php');
-require_once('memcache.php');
+require_once('../lib/database.php');
+require_once('../lib/memcache.php');
 
 function error($string, $desc) {
   die(

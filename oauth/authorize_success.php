@@ -1,8 +1,8 @@
 <?php
 
-require_once('database.php');
-require_once('memcache.php');
-require_once('url_utils.php');
+require_once('../lib/database.php');
+require_once('../lib/memcache.php');
+require_once('../lib/url_utils.php');
 
 $user_id = get_loggedin_user();
 $m = get_memcache();
