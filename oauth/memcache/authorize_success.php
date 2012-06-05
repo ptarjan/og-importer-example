@@ -8,8 +8,18 @@ $user_id = get_loggedin_user();
 $m = get_memcache();
 
 $code = mt_rand();
-$key = 'oauth:code:'.$user_id.':'.$_POST['client_id'].':'.$_POST['redirect_uri'];
-$m->add($key, $code, /* expires in 15 mins */ 15 * 60);
+$key = 'oauth:code:'.$code;
+$m->set(
+  $key, 
+  json_encode(
+    array(
+      'user_id' => $user_id,
+      'client_id' => $_POST['client_id'],
+      'redirect_uri' => $_POST['redirect_uri'],
+    )
+  ),
+  /* expires in 15 mins */ 15 * 60,
+);
 
 $redirect_uri = addParamsToURL(
   $_POST['redirect_uri'], 

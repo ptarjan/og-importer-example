@@ -3,22 +3,36 @@
 require_once('database.php');
 require_once('memcache.php');
 
+function error($string, $desc) {
+  die(
+    json_encode(
+      array(
+        'error' => $string,
+        'error_description' => $desc,
+      )
+    )
+  );
+}
+
 $user_id = get_loggedin_user();
 $m = get_memcache();
 
 assert_correct_secret($_POST['client_id'], $_POST['client_secret']);
 
-$code_key = 'oauth:code:'.$user_id.':'.$_POST['client_id'].':'.$_POST['redirect_uri'];
-$code = $m->get($code_key);
+$code_key = 'oauth:code:'.$_POST['code'];
+$data = $m->get($code_key);
 
-if ($code != $_POST['code']) {
-  die(
-    json_encode(
-      array(
-        'error' => 'invalid_request',
-      )
-    )
-  );
+if (!$data) {
+  error('invalid_grant', 'Invalid code');
+}
+
+$params = json_decode($data);
+
+if (!$params['client_id'] !== $_POST['client_id']) {
+  error('invalid_client', 'Invalid client_id');
+}
+if (!$params['redirect_uri'] !== $_POST['redirect_uri']) {
+  error('invalid_request', 'Invalid redirect_uri');
 }
 
 // So it can't be re-used
