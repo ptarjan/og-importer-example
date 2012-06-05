@@ -18,7 +18,7 @@ $m->set(
       'redirect_uri' => $_POST['redirect_uri'],
     )
   ),
-  /* expires in 15 mins */ 15 * 60,
+  /* expires in 15 mins */ 15 * 60
 );
 
 $redirect_uri = addParamsToURL(
