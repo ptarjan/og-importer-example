@@ -26,7 +26,7 @@ if (!$data) {
   error('invalid_grant', 'Invalid code');
 }
 
-$params = json_decode($data);
+$params = json_decode($data, true);
 
 if (!$params['client_id'] !== $_POST['client_id']) {
   error('invalid_client', 'Invalid client_id');
