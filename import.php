@@ -46,6 +46,7 @@ for ($i = 0; $i < 10; $i++) {
   
   if (isset($data['id'])) {
     // Log something good
+    error_log($response);
   } else {
     // Log some error
     error_log($response);
