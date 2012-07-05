@@ -29,19 +29,27 @@ if (!$data) {
   );
 }
 
+function fb_graph($path, $params) {
+  $params['access_token'] => $_POST['fb_access_token'];
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/'.$path);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
+  return curl_exec($ch);
+}
+ 
+fb_graph('me/brower_notifications', array(
+  'name' => 'og_action_importer_count',
+  'value' => 10
+));
+
 // Publish all the user's data to FB
 for ($i = 0; $i < 10; $i++) {
-  $query = array(
-    'access_token' => $_POST['fb_access_token'],
+  $params = array(
     'start_time' => 1234567890 + rand(-5000000, 5000000),
     'website' => 'http://example.com/',
   );
-
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/me/default_example:do_something_to');
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
-  $response = curl_exec($ch);
+  $response = fb_graph('me/default_example:do_something_to', $params);
   $data = json_decode($response, true);
   
   if (isset($data['id'])) {
@@ -52,6 +60,12 @@ for ($i = 0; $i < 10; $i++) {
     error_log($response);
   }
 }
+
+fb_graph('me/brower_notifications', array(
+  'name' => 'done',
+  'value' => true
+));
+
 
 die(
   json_encode(
