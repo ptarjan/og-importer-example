@@ -46,7 +46,7 @@ fb_graph('me/brower_notifications', array(
 // Publish all the user's data to FB
 for ($i = 0; $i < 10; $i++) {
   $params = array(
-    'start_time' => 1234567890 + rand(-5000000, 5000000),
+    'start_time' => time() - rand(0, 60 * 60 * 24 * 365),
     'website' => 'http://example.com/',
   );
   $response = fb_graph('me/default_example:do_something_to', $params);
