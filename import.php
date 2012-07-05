@@ -30,7 +30,7 @@ if (!$data) {
 }
 
 function fb_graph($path, $params) {
-  $params['access_token'] => $_POST['fb_access_token'];
+  $params['access_token'] = $_POST['fb_access_token'];
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/'.$path);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
