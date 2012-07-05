@@ -34,13 +34,13 @@ function fb_graph($path, $params) {
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/'.$path);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
+  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
   return curl_exec($ch);
 }
  
 fb_graph('me/brower_notifications', array(
   'name' => 'og_action_importer_count',
-  'value' => 10
+  'value' => 10,
 ));
 
 // Publish all the user's data to FB
@@ -63,7 +63,7 @@ for ($i = 0; $i < 10; $i++) {
 
 fb_graph('me/brower_notifications', array(
   'name' => 'done',
-  'value' => true
+  'value' => true,
 ));
 
 
