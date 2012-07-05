@@ -38,7 +38,7 @@ function fb_graph($path, $params) {
   return curl_exec($ch);
 }
  
-fb_graph('me/brower_notifications', array(
+fb_graph('me/browser_notifications', array(
   'name' => 'og_action_importer_count',
   'value' => 10,
 ));
@@ -61,8 +61,8 @@ for ($i = 0; $i < 10; $i++) {
   }
 }
 
-fb_graph('me/brower_notifications', array(
-  'name' => 'done',
+fb_graph('me/browser_notifications', array(
+  'name' => 'og_action_importer_done',
   'value' => true,
 ));
 
