@@ -48,6 +48,11 @@ for ($i = 0; $i < 10; $i++) {
   $params = array(
     'start_time' => time() - rand(0, 60 * 60 * 24 * 365),
     'website' => 'http://example.com/',
+    'int' => rand(100, 1000),
+    'float' => rand(1, 1000) / 1000,
+    'string' => md5(rand()),
+    'boolean' => (bool) rand(0, 1),
+    'datetime' => rand(1, time()),
   );
   $response = fb_graph('me/default_example:do_something_to', $params);
   $data = json_decode($response, true);
