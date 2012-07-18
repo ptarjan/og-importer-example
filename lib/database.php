@@ -26,6 +26,9 @@ function assert_redirect_allowed($id, $redirect_uri) {
   if ($redirect_uri == 'https://www.ptarjan.dev002.ash4.facebook.com/open_graph/oauth/callback?allow_iframe=1&service=1001') {
     return;
   }
+  if ($redirect_uri == 'https://www.luchen.dev3178.facebook.com/open_graph/oauth/callback?allow_iframe=1&service=1001') {
+    return;
+  }
   throw new Exception('Invalid Redirect URI: '.$redirect_uri);
 }
 
