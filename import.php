@@ -40,11 +40,11 @@ function fb_graph($path, $params) {
  
 fb_graph('me/browser_notifications', array(
   'name' => 'og_action_importer_count',
-  'value' => 10,
+  'value' => 15,
 ));
 
 // Publish all the user's data to FB
-for ($i = 0; $i < 100; $i++) {
+for ($i = 0; $i < 15; $i++) {
   $params = array(
     'start_time' => time() - rand(0, 60 * 60 * 24 * 365),
     'website' => 'http://example.com/',
