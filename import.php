@@ -73,7 +73,8 @@ fb_graph('me/browser_notifications', array(
 ));
 
 
-die(
+header('Content-Type: text/javascript');
+echo(
   json_encode(
     array(
       'success' => true,
