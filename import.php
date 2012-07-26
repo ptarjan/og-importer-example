@@ -30,19 +30,26 @@ if (!$data) {
 }
 
 function fb_graph($path, $params) {
+  return curl_exec(fb_graph_get_curl($path, $params));
+}
+
+function fb_graph_get_curl($path, $params) {
   $params['access_token'] = $_POST['fb_access_token'];
   $params['no_feed_story'] = '1';
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/'.$path);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-  return curl_exec($ch);
+  return $ch;
 }
  
 fb_graph('me/browser_notifications', array(
   'name' => 'og_action_importer_count',
   'value' => 15,
 ));
+
+// Do all the curls at the same time
+$mh = curl_multi_init();
 
 // Publish all the user's data to FB
 for ($i = 0; $i < 15; $i++) {
@@ -55,23 +62,20 @@ for ($i = 0; $i < 15; $i++) {
     'boolean' => (bool) rand(0, 1),
     'datetime' => rand(1, time()),
   );
-  $response = fb_graph('me/default_example:do_something_to', $params);
-  $data = json_decode($response, true);
-  
-  if (isset($data['id'])) {
-    // Log something good
-    error_log($response);
-  } else {
-    // Log some error
-    error_log($response);
-  }
+  $ch = fb_graph_get_curl('me/default_example:do_something_to', $params);
+  curl_multi_add_handle($mh, $ch);
 }
+
+// execute the handles
+$running = null;
+do {
+  curl_multi_exec($mh, $running);
+} while ($running > 0);
 
 fb_graph('me/browser_notifications', array(
   'name' => 'og_action_importer_done',
   'value' => true,
 ));
-
 
 header('Content-Type: text/javascript');
 echo(
