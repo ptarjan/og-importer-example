@@ -14,7 +14,12 @@ if (!$_SERVER['HTTPS'] && $_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
   );
 }
 
-$publish_count = 50;
+// Use 'heroku config' to view current env variables
+// Use 'heroku config:add NAME=value' to set
+$publish_count = getenv('OG_IMPORT_COUNT') !== FALSE
+  ? intval(getenv('OG_IMPORT_COUNT'))
+  : 15;
+
 $key = 'oauth:access_token:'.$_POST['access_token'];
 $m = get_memcache();
 $data = $m->get($key);
